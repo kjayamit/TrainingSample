@@ -2,6 +2,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.concurrent.TimeUnit;
 
@@ -11,6 +12,10 @@ public class SearchAndAddProductToCart {
         System.out.println("I am a Geek");
         WebDriver webDriver;
         final String baseUrl = "http://spree-vapasi.herokuapp.com/";
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--headless");
         WebDriverManager.chromedriver().setup();
         webDriver = new ChromeDriver();
 
