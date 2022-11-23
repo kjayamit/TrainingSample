@@ -12,12 +12,13 @@ public class SearchAndAddProductToCart {
         System.out.println("I am a Geek");
         WebDriver webDriver;
         final String baseUrl = "http://spree-vapasi.herokuapp.com/";
+        WebDriverManager.chromedriver().setup();
+
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--headless");
-        WebDriverManager.chromedriver().setup();
-        webDriver = new ChromeDriver();
+        webDriver = new ChromeDriver(options);
 
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         webDriver.manage().window().maximize();
