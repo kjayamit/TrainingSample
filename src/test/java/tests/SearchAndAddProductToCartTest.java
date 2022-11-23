@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.HomePage;
@@ -24,10 +25,31 @@ public class SearchAndAddProductToCartTest {
     @Test
     public void verifySearchAndClickOnProduct() {
 
-        DriverInit driverInit = new DriverInit();
-        driverInit.getBrowser();
+        System.out.println("I am a Geek");
+        WebDriver webDriver;
+        final String baseUrl = "http://spree-vapasi.herokuapp.com/";
+        WebDriverManager.chromedriver().setup();
 
-        homePage.enterSearchCriteriaToSearchBox("tote");
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("start-maximized"); // open Browser in maximized mode
+        options.addArguments("disable-infobars"); // disabling infobars
+        options.addArguments("--disable-extensions"); // disabling extensions
+        options.addArguments("--disable-gpu"); // applicable to windows os only
+        options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+        options.addArguments("--no-sandbox"); // Bypass OS security model
+        webDriver = new ChromeDriver(options);
+
+        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        webDriver.manage().window().maximize();
+
+        webDriver.get(baseUrl);
+
+        webDriver.findElement(By.cssSelector("#keywords")).click();
+        webDriver.findElement(By.cssSelector("#keywords")).sendKeys("Jersey");
+
+        webDriver.findElement(By.cssSelector("input[value='Search']")).click();
+
         System.out.println(" Sniff + Regression" + System.getProperty("environment"));
 
 
